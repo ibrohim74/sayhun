@@ -3,7 +3,8 @@ import {dataUz} from "../component/db";
 import {Button, Modal, Checkbox, Form, Input, InputNumber} from 'antd';
 import axios from "axios";
 import {Link,useNavigate} from "react-router-dom";
-
+import PhoneInput from 'react-phone-input-2'
+import 'react-phone-input-2/lib/style.css'
 
 const Home = () => {
     const [product, setProduct] = useState([]);
@@ -146,8 +147,8 @@ const Home = () => {
                     errorBox.style.display = 'none'
                 }, 4000)
             } else {
-                if (telNumber.length < 9 ){
-                    errorContent.innerHTML = "Namuna : +998991234567 yoki 991234567";
+                if (telNumber.length === 0 || telNumber === '' || telNumber.length <11 ){
+                    errorContent.innerHTML = "Namuna : +998991234567 ";
                     errorBox.style.display = 'flex'
                     errorBox.style.background = 'rgba(255,0,0, 0.7)';
                     setTimeout(() => {
@@ -159,10 +160,11 @@ const Home = () => {
                     msg += product.map((item) => "\n"+ item.name + " : " + item.count + "ta : " + item.price * item.count + " so'm" + "\n");
                     msg += "\n Jami: " + totalPrice + " so'm\n";
                     msg += "\n buyurtmachi: " + userName;
-                    msg += "\n Telefon raqami: " + telNumber;
+                    msg += "\n Telefon raqami: +" + telNumber;
 
                     const TOKEN = "6054819816:AAFKboM9WpjFLsq8fPC2cOufW7S5gdF8nYs";
-                    const CHAT_ID = "-1001616700443";
+                    // const CHAT_ID = "-1001616700443";
+                    const CHAT_ID = "-1001811570436";
 
                     try {
                         axios.post("https://api.telegram.org/bot" + TOKEN + "/sendMessage", {
@@ -257,8 +259,13 @@ const Home = () => {
                         </div>
                         <div className="form-input">
                             <label>Telefon Raqamingiz</label>
-                            <input type="tel" placeholder={"Telefon raqamingiz"} value={telNumber}
-                                   onChange={e => setTelNumber(e.target.value)} required maxLength={13} minLength={9}/>
+                            <PhoneInput
+                                style={{height:'50px !important'}}
+                                country={'uz'}
+                                placeholder={"+998 99 123 45 67"}
+                                onChange={(phone) => setTelNumber(phone)}
+                                required
+                            />
                         </div>
                         <button type={'submit'} onClick={getUser}>Jonatish</button>
                     </div>

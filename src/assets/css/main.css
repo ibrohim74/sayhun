@@ -23,10 +23,13 @@ a {
 
 input {
     border: 3px solid #0AB2A1;
-    text-align: center;
+    text-align: left;
     border-radius: 10px;
+    outline: none;
 }
-
+button{
+    cursor: pointer;
+}
 .language-content {
     display: flex;
     justify-content: center;
@@ -534,8 +537,10 @@ nav {
 }
 
 .form-input input {
-    width: 100%;
-    height: 30px;
+    width: 300px;
+    padding: 5px 20px;
+    height: 35px;
+    border: 1px solid #CACACA;
 }
 
 .form-input label {
